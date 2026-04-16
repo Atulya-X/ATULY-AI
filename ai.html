@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --chat-bg: #ffffff;
+            --primary: #007bff;
+            --text-user: #ffffff;
+            --text-bot: #333333;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        
+        /* Chat Container */
+        .chat-container { width: 400px; height: 600px; background: var(--chat-bg); border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; }
+
+        /* Header */
+        .chat-header { background: var(--primary); color: white; padding: 20px; text-align: center; font-weight: bold; font-size: 1.2rem; }
+
+        /* Message Area */
+        .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        
+        .message { max-width: 80%; padding: 12px 16px; border-radius: 15px; font-size: 0.95rem; line-height: 1.4; }
+        .user-msg { align-self: flex-end; background: var(--primary); color: var(--text-user); border-bottom-right-radius: 2px; }
+        .bot-msg { align-self: flex-start; background: #e9ecef; color: var(--text-bot); border-bottom-left-radius: 2px; }
+
+        /* Input Area */
+        .input-area { border-top: 1px solid #ddd; padding: 15px; display: flex; gap: 10px; background: #fff; }
+        input { flex: 1; border: 1px solid #ddd; padding: 12px; border-radius: 25px; outline: none; }
+        button { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; transition: 0.3s; }
+        button:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">AI Assistant</div>
+    <div class="chat-box" id="chatBox">
+        <div class="message bot-msg">Hello! How can I help you today?</div>
+    </div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const chatBox = document.getElementById('chatBox');
+
+        if (input.value.trim() === "") return;
+
+        // Add User Message
+        const userDiv = document.createElement('div');
+        userDiv.className = 'message user-msg';
+        userDiv.textContent = input.value;
+        chatBox.appendChild(userDiv);
+
+        // Simulate Bot Response (You would connect your Python API here)
+        setTimeout(() => {
+            const botDiv = document.createElement('div');
+            botDiv.className = 'message bot-msg';
+            botDiv.textContent = "I'm just a demo UI! Connect me to your Python backend to get real AI answers.";
+            chatBox.appendChild(botDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 800);
+
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+
+</body>
+</html>
